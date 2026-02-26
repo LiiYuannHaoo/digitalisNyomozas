@@ -12,8 +12,10 @@ internal class Program
 
         while (fut)
         {
-            Console.WriteLine("1 Új ügy");
+            Console.WriteLine("1 Új ugy");
             Console.WriteLine("2 Ügyek listázása");
+            Console.WriteLine("3 Személy hozzáadás");
+
 
             string valasz = Console.ReadLine() ?? "";
 
@@ -35,7 +37,23 @@ internal class Program
                         Console.WriteLine(u);
                     break;
 
-                
+                case "3":
+                    Console.Write("Ügy ID: ");
+                    string uid = Console.ReadLine() ?? "";
+                    var ugy = store.Ugyek.Find(x => x.UgyAzonosito == uid);
+
+                    if (ugy != null)
+                    {
+                        Console.Write("Név: ");
+                        string nev = Console.ReadLine() ?? "";
+                        Console.Write("Kor: ");
+                        int kor = int.Parse(Console.ReadLine() ?? "0");
+
+                        ugy.SzemelyHozzaadas(new Person(nev, kor, ""));
+                    }
+                    break;
+
+        
             }
         }
     }
